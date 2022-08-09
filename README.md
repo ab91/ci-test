@@ -1,21 +1,26 @@
-# Abhra's Portfolio
+# WebdriverIO, Sauce Labs Desktop Web and W3C
+This folder contains an example on how to run WebdriverIO tests in the Sauce Labs Desktop Web cloud with W3C 
+capabilities.
 
-This site utilizes HTML, CSS, and Bootstrap to display my portfolio.
+## W3C capabilities
+More information about the W3C capabilities and Sauce Labs can be found
+[here](https://wiki.saucelabs.com/display/DOCS/W3C+Capabilities+Support). An example configuration on how to use this
+with WebdriverIO can be found in this [test/configs/wdio.saucelabs.conf.js](./test/configs/wdio.saucelabs.conf.js)-file.
 
-## Gallery
+## Install dependencies
+You can install all dependencies by running the following command
 
-<p align="center">
-  <img src="http://res.cloudinary.com/ab91/image/upload/v1514295812/Portfolio/Screen_Shot_2017-12-26_at_7.43.02_AM.png" alt="Portfolio image"/>
-</p>
+    npm install
 
-## Link
+This will install all needed dependencies that are listed in the `package.json`-file
 
-Visit the project at [http://ab91.github.io/](http://ab91.github.io/)
+> NOTE: Make sure you are in the folder `webdriverio/webdriver/examples/w3c` when you execute this command
 
-## Features
+## Run tests on Sauce Labs
+You can run your tests on Sauce Labs US DC with this command
 
-This portfolio showcases my front end web development projects.
+    npm run test.saucelabs.us
 
-## Licensing
+You can run your tests on Sauce Labs EU DC with this command
 
-The code in this project is not licensed.
+    npm run test.saucelabs.eu
