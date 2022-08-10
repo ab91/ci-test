@@ -3,7 +3,7 @@ name: Conditional Test Run
 # Controls when the workflow will run
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
     branches:
@@ -21,15 +21,20 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # - name: HTTP Request Action
-      #   uses: fjogeleit/http-request-action@v1.10.0
+      - name: HTTP Request Action
+        uses: fjogeleit/http-request-action@v1.10.0
+        with:
+          url: "https://api.us-west-1.saucelabs.com/rest/v1.2/users/oauth-abe.biswas-7996b/concurrency"
+          method: "GET"
+          username: ${{ secrets.SAUCE_USERNAME }}
+          password: ${{ secrets.SAUCE_ACCESS_KEY }}
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # - name: Run a one-line script
+      #   run: echo Hello, world!
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      # # Runs a set of commands using the runners shell
+      # - name: Run a multi-line script
+      #   run: |
+      #     echo Add other actions to build,
+      #     echo test, and deploy your project.
