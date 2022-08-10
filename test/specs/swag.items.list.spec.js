@@ -15,8 +15,8 @@ describe('Swag items list', () => {
 
         // Actual test starts here
         await expect(await SwagOverviewPage.getAmount()).toEqual(
-            5,
-            'Amount of items was more than 5',
+            6,
+            'Amount of items was not equal to 6',
         );
     });
 
