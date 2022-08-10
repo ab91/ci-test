@@ -22,12 +22,17 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: HTTP Request Action
+        id: myRequest
         uses: fjogeleit/http-request-action@v1.10.0
         with:
           url: "https://api.us-west-1.saucelabs.com/rest/v1.2/users/oauth-abe.biswas-7996b/concurrency"
           method: "GET"
           username: ${{ secrets.SAUCE_USERNAME }}
           password: ${{ secrets.SAUCE_ACCESS_KEY }}
+
+      - name: HTTP Show Response
+        run: |
+          echo ${{ steps.myRequest.outputs.response }}
 
       # Runs a single command using the runners shell
       # - name: Run a one-line script
