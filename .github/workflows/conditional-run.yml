@@ -32,8 +32,10 @@ jobs:
 
       - name: HTTP Show Response
         run: |
-          echo ${{ steps.myRequest.outputs.response }}
-
+          echo ${{ steps.myRequest.outputs.response.concurency.organization.current.vms }}
+          export FOO=${{ steps.myRequest.outputs.response.concurency.organization.current.vms }}
+          echo "::set-env name=FOO::$FOO"
+        
       # Runs a single command using the runners shell
       # - name: Run a one-line script
       #   run: echo Hello, world!
