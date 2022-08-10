@@ -50,6 +50,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests Android
+      - name: Run tests Android in US
+        if: echo ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }} == 10
         run: npm run test.saucelabs.us
+
+      - name: Run tests Android in EU
+        if: echo ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }} == 0
+        run: npm run test.saucelabs.eu
 
