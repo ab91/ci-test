@@ -23,7 +23,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+
 
       - name: HTTP Request Action
         id: myRequest
@@ -34,13 +34,13 @@ jobs:
           username: ${{ secrets.SAUCE_USERNAME }}
           password: ${{ secrets.SAUCE_ACCESS_KEY }}
 
+      - uses: actions/checkout@v3
+        if: ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }} == 10
+
       - name: HTTP Show Response
         run: |
           echo ${{ steps.myRequest.outputs.response }}
           echo ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }}
-
-      - name: Checkout Repository
-        uses: actions/checkout@v2
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -50,11 +50,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests Android in US
-        if: ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }} == "10"
-        run: npm run test.saucelabs.us
+      # - name: Run tests Android in US
+      #   if: ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }} == 10
+      #   run: npm run test.saucelabs.us
 
-      - name: Run tests Android in EU
-        if: ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }} == "0"
-        run: npm run test.saucelabs.eu
-
+      # - name: Run tests Android in EU
+      #   if: ${{ fromJson(steps.myRequest.outputs.response).concurrency.organization.current.vms }} == 0
+      #   run: npm run test.saucelabs.eu
